@@ -19,7 +19,8 @@ var searchCityBtn = $(".searchCityBtn");
 var cityInfo = $("#cityInfo");
 // var myCityInfo = JSON.stringify(cityInfo);
 
-
+$("h1").css({"color": "green"}) // change html text style 
+$(".card-body").css({"background-color": "snow"})
 // grabbing the search input's value using .val() on a click
 
 searchCityBtn.on("click", function () {
