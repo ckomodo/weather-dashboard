@@ -1,35 +1,33 @@
-//TODO: set up page layout
-//TODO: searched cities should be clickable
-//TODO: add event listener to the search button
-//TODO: include a 5-day weather forecast
-//TODO: a box to display the weather in 
-//TODO: another box to display 5-day forecast of the same city
-//TODO: save all searched cities in a form and on local storage
+
+var myCityStored = localStorage.getItem("cityInfo");
+console.log(myCityStored);
+$(".cityBox").hide();
 
 
 
-
-
-//TODO: add 5-day forecast, add css, local storage
-
-//(https://openweathermap.org/api)
-// put the input in a variable first
 var userCity = $(".user-city");
 var searchCityBtn = $(".searchCityBtn");
 var cityInfo = $("#cityInfo");
-// var myCityInfo = JSON.stringify(cityInfo);
+var cityButton = $("#cityButton");
 
 $("h1").css({"color": "green"}) // change html text style 
 $(".card-body").css({"background-color": "snow"})
 // grabbing the search input's value using .val() on a click
 
 searchCityBtn.on("click", function () {
-    var city = userCity.val();
+    var city = userCity.val().trim();
     displayCityWeather(city)
-    localStorage.setItem("cityInfo", myCityInfo);
-    var myCityInfo = JSON.stringify(cityInfo);
-    var myCityStored = JSON.parse(localStorage.getItem("myCityInfo"));
+
+    $("#cityButton").clone().attr("id", cityButton + $(this).index()).insertAfter("#cityButton");
+
+    // var newButton = $("<button>")  
+    // newButton.attr("#cityButton");
+    $("#cityButton").text(city);
+
     console.log(myCityStored);
+    
+    $(".cityBox").show();
+    var myCityStored = JSON.parse(localStorage.getItem("myCityInfo"));
 
 })
 
@@ -44,6 +42,10 @@ searchCityBtn.on("click", function () {
         method: "GET"
     }).then(function (response) {
         console.log(response)
+        var myCityInfo = JSON.stringify(response.name);
+        localStorage.setItem("cityInfo", myCityInfo);
+        var myCityStored = localStorage.getItem("cityInfo");
+        console.log(myCityStored);
 
         $("#name").text("City: " + response.name);
         $("#temp").text("Temperature: " + response.main.temp + " \u00B0C");
@@ -90,9 +92,3 @@ searchCityBtn.on("click", function () {
 
 
 }
-
-//$(document).on("click", ".city-button", displayCityWeather);
-
-{/* <button class="city-button" data-name="Bellevue"></button>
-<button class="city-button" data-name="San Diego"></button>
-<button class="city-button" data-name="Los Angeles"></button> */}

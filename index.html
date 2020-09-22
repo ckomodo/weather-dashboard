@@ -11,44 +11,51 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="jumbotron">
-        <h1 class="display-4">your favorite weatherman!</h1>
-        <p class="lead">whether you're planning your travel, tour or just a regular drive, find out the weather before you go.</p>
-        <hr class="my-4">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">your favorite weatherman!</h1>
+            <p class="lead">whether you're planning your travel, tour or just a regular drive, find out the weather
+                before you go.</p>
+            <hr class="my-4">
+        </div>
+
+
+
+
+
+        <h1 class="heading1">search any city</h1>
+
+        <input type="text" class="user-city" placeholder="enter city">
+        <button class="searchCityBtn">Search</button>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <div class="card" style="width: 18rem;">
+            <img src="" alt="">
+            <div class="card-body">
+                <div id="cityInfo">
+                    <div id="name"></div>
+                    <div id="temp"></div>
+                    <div id="humidity"></div>
+                    <div id="windSpeed"></div>
+                    <div id="uvIndex"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-
-
-
-    <h1 class="heading1">search any city</h1>
-
-    <input type="text" class="user-city" placeholder="enter city">
-    <button class="searchCityBtn">Search</button>
+<div class="cityBox">
+<button id="cityButton">
     <br>
-    <br>
-    <br>
-    <br>
-
-
-<div class="card" style="width: 18rem;">
-  <img src="" alt="">
-  <div class="card-body">
-    <div id="cityInfo">
-        <div id="name"></div>
-        <div id="temp"></div>
-        <div id="humidity"></div>
-        <div id="windSpeed"></div>
-        <div id="uvIndex"></div>
-    </div> 
-  </div>
+</button>
 </div>
 
 
 
 
-      
 
 
 
@@ -67,13 +74,12 @@
 
 
 
-    
 
 
-        
+
 
     </div>
-</div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -84,7 +90,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-        <script src="script.js"></script>
+    <script src="script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 

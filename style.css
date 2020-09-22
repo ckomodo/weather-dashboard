@@ -1,4 +1,17 @@
 body{
-    background-image: url("https://p0.pxfuel.com/preview/222/776/976/raisting-earth-station-antenna-zugspitze-royalty-free-thumbnail.jpg")
+    /* background-image: url("https://p0.pxfuel.com/preview/222/776/976/raisting-earth-station-antenna-zugspitze-royalty-free-thumbnail.jpg") */
+}
+.cityBox{
+    width: 18rem;
+    height: 18rem;
+    float: right;
+    margin-right: 25%;
+    margin-bottom: 20%;    
+    border: 1px red solid;
+    background-color: antiquewhite
 }
 
+#cityButton{
+    margin: 5%;
+    
+}
