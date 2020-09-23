@@ -1,38 +1,60 @@
 
+var searchedCityArr = [];
+var stringifiedCity = JSON.parse(localStorage.getItem("city"))
+console.log(stringifiedCity);
 var myCityStored = localStorage.getItem("cityInfo");
 console.log(myCityStored);
-$(".cityBox").hide();
+// $(".cityBox").hide();
 
+function renderCityButtons(){
+if(searchedCityArr!==null){
+for(i=0; i<searchedCityArr.length; i++){
+    var newButton = $("<button>, <br>")
+    newButton.attr("class", "dynamicButton")
+    newButton.text(searchedCityArr[i]);
+    $(".cityBox").append(newButton);
 
+}}
+
+$(document).on("click", ".dynamicButton", function(){
+    console.log($(this).text())
+})
+}
 
 var userCity = $(".user-city");
 var searchCityBtn = $(".searchCityBtn");
 var cityInfo = $("#cityInfo");
 var cityButton = $("#cityButton");
 
-$("h1").css({"color": "green"}) // change html text style 
-$(".card-body").css({"background-color": "snow"})
+$("h1").css({ "color": "green" }) // change html text style 
+$(".card-body").css({ "background-color": "snow" })
 // grabbing the search input's value using .val() on a click
 
 searchCityBtn.on("click", function () {
     var city = userCity.val().trim();
-    displayCityWeather(city)
+    searchedCityArr.push(city);
+    console.log(searchedCityArr);
+    var stringifiedCity = JSON.stringify(searchedCityArr)
+    localStorage.setItem("city", stringifiedCity)
 
-    $("#cityButton").clone().attr("id", cityButton + $(this).index()).insertAfter("#cityButton");
+    displayCityWeather(city);
+    renderCityButtons (searchedCityArr[0]);
+
+    // $("#cityButton").clone().attr("id", cityButton + $(this).index()).insertAfter("#cityButton");
 
     // var newButton = $("<button>")  
     // newButton.attr("#cityButton");
     $("#cityButton").text(city);
 
     console.log(myCityStored);
-    
+
     $(".cityBox").show();
     var myCityStored = JSON.parse(localStorage.getItem("myCityInfo"));
 
 })
 
-    function displayCityWeather(city) {
-    
+function displayCityWeather(city) {
+
     var apiKey = "edd3e012095cf88073c626bc32dbce78"
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric";
 
@@ -43,6 +65,7 @@ searchCityBtn.on("click", function () {
     }).then(function (response) {
         console.log(response)
         var myCityInfo = JSON.stringify(response.name);
+        console.log(myCityInfo);
         localStorage.setItem("cityInfo", myCityInfo);
         var myCityStored = localStorage.getItem("cityInfo");
         console.log(myCityStored);
@@ -88,7 +111,5 @@ searchCityBtn.on("click", function () {
 
 
     });
-
-
 
 }
