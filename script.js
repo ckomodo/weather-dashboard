@@ -58,6 +58,7 @@ function displayCityWeather(city) {
         $("#temp").text("Temperature: " + response.main.temp + " \u00B0C");
         $("#humidity").text("Humidity: " + response.main.humidity);
         $("#windSpeed").text("Wind Speed: " + response.wind.speed);
+        
 
 
 
@@ -72,14 +73,14 @@ function displayCityWeather(city) {
 
         }).then(function (response) {
             console.log(response);
-            $("div", "#uvIndex").text("UV Index is: " + response.value);
+            $("#uvIndex").text("UV Index is: " + response.value);
 
         })
 
-        if(uvIndex<2){
+        // if(uvIndex<2){
 
-            $("#uvIndex").css("background-color", "Green")
-        }
+        //     $("#uvIndex").css("background-color", "Green")
+        // }
 
     });
 
@@ -96,7 +97,7 @@ function displayCityWeather(city) {
         $("#temp1").text("Temperature: " + response.list[0].main.temp + " \u00B0C");
         $("#humidity1").text("Humidity: " + response.list[0].main.humidity);
         $("#windSpeed1").text("Wind Speed: " + response.list[0].wind.speed);
-        // $("#uvIndex1").text("UV Index is: " + response.list[0].value);
+        
 
         $("#name2").text("City: " + response.city.name);
         $("#temp2").text("Temperature: " + response.list[1].main.temp + " \u00B0C");

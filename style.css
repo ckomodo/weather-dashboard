@@ -5,6 +5,14 @@ body{
 h1{
     color: green;
 }
+.todayWeather{
+    margin-left: 15%;
+}
+.userArea{
+    
+    margin-left: 15%;
+    
+}
 
 .card-body{
     background-color: snow
@@ -13,13 +21,18 @@ h1{
 .cityBox{
     width: 18rem;
     height: 18rem;
-    float: right;
-    margin-right: 25%;
+    float: left;
+    margin-top: 0px;
+    margin-left: 15%;
     margin-bottom: 20%;    
     border: 1px red solid;
     background-color: antiquewhite
 }
 
+.forecast{
+    float: right;
+    margin-right: 25%;
+}
 #cityButton{
     margin: 5%;
     
