@@ -24,17 +24,19 @@ function renderCityButtons() {
             newButton.attr("class", "dynamicButton")
             newButton.text(searchedCityArr[i]);
             $(".cityBox").append(newButton);
-            
+
 
         }
     }
 
-    $(document).on("click", ".dynamicButton", function () {
-        console.log($(this).text())
-        // $("#currentWeather").show();
-        // displayCityWeather(city);
-    })
+
 }
+    $(document).on("click", ".dynamicButton", function () { 
+    
+    // $("#currentWeather").show();
+    displayCityWeather(($(this).text()));
+    $("#currentWeather").show();
+})
 var dynamicButton = $(".dynamicButton")
 
 function displayCityWeather(city) {
@@ -58,7 +60,7 @@ function displayCityWeather(city) {
         $("#temp").text("Temperature: " + response.main.temp + " \u00B0C");
         $("#humidity").text("Humidity: " + response.main.humidity);
         $("#windSpeed").text("Wind Speed: " + response.wind.speed);
-        
+
 
 
 
@@ -75,12 +77,17 @@ function displayCityWeather(city) {
             console.log(response);
             $("#uvIndex").text("UV Index is: " + response.value);
 
+            if (response.value <=2) {
+
+                $("#uvIndex").css("background-color", "green")
+
+            }
+            else if(response.value<=5){
+                $("#uvIndex").css("background-color", "yellow")
+            }
+            console.log(response.value)
         })
 
-        // if(uvIndex<2){
-
-        //     $("#uvIndex").css("background-color", "Green")
-        // }
 
     });
 
@@ -97,13 +104,13 @@ function displayCityWeather(city) {
         $("#temp1").text("Temperature: " + response.list[0].main.temp + " \u00B0C");
         $("#humidity1").text("Humidity: " + response.list[0].main.humidity);
         $("#windSpeed1").text("Wind Speed: " + response.list[0].wind.speed);
-        
+
 
         $("#name2").text("City: " + response.city.name);
         $("#temp2").text("Temperature: " + response.list[1].main.temp + " \u00B0C");
         $("#humidity2").text("Humidity: " + response.list[1].main.humidity);
         $("#windSpeed2").text("Wind Speed: " + response.list[1].wind.speed);
-        
+
 
         $("#name3").text("City: " + response.city.name);
         $("#temp3").text("Temperature: " + response.list[2].main.temp + " \u00B0C");
@@ -152,7 +159,7 @@ searchCityBtn.on("click", function () {
 
 })
 
-dynamicButton.on("click", function(){
+dynamicButton.on("click", function () {
     displayCityWeather(city);
 })
 // displayCityWeather(city);
