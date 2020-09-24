@@ -1,57 +1,38 @@
 
 var searchedCityArr = [];
-var stringifiedCity = JSON.parse(localStorage.getItem("city"))
-console.log(stringifiedCity);
-var myCityStored = localStorage.getItem("cityInfo");
-console.log(myCityStored);
-// $(".cityBox").hide();
-
-function renderCityButtons(){
-if(searchedCityArr!==null){
-for(i=0; i<searchedCityArr.length; i++){
-    var newButton = $("<button>, <br>")
-    newButton.attr("class", "dynamicButton")
-    newButton.text(searchedCityArr[i]);
-    $(".cityBox").append(newButton);
-
-}}
-
-$(document).on("click", ".dynamicButton", function(){
-    console.log($(this).text())
-})
+var stringifiedCity = JSON.parse(localStorage.getItem("city"));
+if (stringifiedCity !== null) {
+    searchedCityArr = stringifiedCity;
 }
 
+
+var myCityStored = localStorage.getItem("cityInfo");
+console.log(myCityStored);
 var userCity = $(".user-city");
 var searchCityBtn = $(".searchCityBtn");
 var cityInfo = $("#cityInfo");
 var cityButton = $("#cityButton");
 
-$("h1").css({ "color": "green" }) // change html text style 
-$(".card-body").css({ "background-color": "snow" })
-// grabbing the search input's value using .val() on a click
 
-searchCityBtn.on("click", function () {
-    var city = userCity.val().trim();
-    searchedCityArr.push(city);
-    console.log(searchedCityArr);
-    var stringifiedCity = JSON.stringify(searchedCityArr)
-    localStorage.setItem("city", stringifiedCity)
+function renderCityButtons() {
+    if (searchedCityArr !== null) {
+        $(".cityBox").empty();
+        for (i = 0; i < searchedCityArr.length; i++) {
+            var newButton = $("<button>, <br>")
+            newButton.attr("class", "dynamicButton")
+            newButton.text(searchedCityArr[i]);
+            $(".cityBox").append(newButton);
+            
 
-    displayCityWeather(city);
-    renderCityButtons (searchedCityArr[0]);
+        }
+    }
 
-    // $("#cityButton").clone().attr("id", cityButton + $(this).index()).insertAfter("#cityButton");
-
-    // var newButton = $("<button>")  
-    // newButton.attr("#cityButton");
-    $("#cityButton").text(city);
-
-    console.log(myCityStored);
-
-    $(".cityBox").show();
-    var myCityStored = JSON.parse(localStorage.getItem("myCityInfo"));
-
-})
+    $(document).on("click", ".dynamicButton", function () {
+        console.log($(this).text())
+        $("#currentWeather").show();
+    })
+}
+var dynamicButton = $(".dynamicButton")
 
 function displayCityWeather(city) {
 
@@ -80,7 +61,7 @@ function displayCityWeather(city) {
         var lat = response.coord.lat;
         var lon = response.coord.lon;
 
-        var queryURL1 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey;
+        var queryURL1 = "https://api.openweathermap.org/data/2.5/uvi?&appid=" + apiKey + "&lat=" + lat + "&lon=" + lon;
         $.ajax({
 
             url: queryURL1,
@@ -88,7 +69,7 @@ function displayCityWeather(city) {
 
         }).then(function (response) {
             console.log(response);
-            $("#uvIndex").text("UV Index is: " + lat + lon);
+            $("#uvIndex").text("UV Index is: " + response.value);
 
         })
 
@@ -112,4 +93,38 @@ function displayCityWeather(city) {
 
     });
 
+
 }
+
+searchCityBtn.on("click", function () {
+    // grabbing the search input's value using .val() on a click
+    var city = userCity.val().trim();
+    if (city !== "") {
+        searchedCityArr.push(city);
+        console.log(searchedCityArr);
+        var stringifiedCity = JSON.stringify(searchedCityArr)
+        localStorage.setItem("city", stringifiedCity)
+
+        displayCityWeather(city);
+        renderCityButtons();
+
+        // $("#cityButton").clone().attr("id", cityButton + $(this).index()).insertAfter("#cityButton");
+
+        // var newButton = $("<button>")  
+        // newButton.attr("#cityButton");
+        $("#cityButton").text(city);
+
+        console.log(myCityStored);
+
+        $("#currentWeather").show();
+        var myCityStored = JSON.parse(localStorage.getItem("myCityInfo"));
+    }
+
+})
+
+dynamicButton.on("click", function(){
+    displayCityWeather(city);
+})
+displayCityWeather(city);
+$("#currentWeather").hide();
+renderCityButtons();

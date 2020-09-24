@@ -1,6 +1,15 @@
 body{
     /* background-image: url("https://p0.pxfuel.com/preview/222/776/976/raisting-earth-station-antenna-zugspitze-royalty-free-thumbnail.jpg") */
 }
+
+h1{
+    color: green;
+}
+
+.card-body{
+    background-color: snow
+ }
+
 .cityBox{
     width: 18rem;
     height: 18rem;
