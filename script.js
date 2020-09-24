@@ -4,14 +4,16 @@ var stringifiedCity = JSON.parse(localStorage.getItem("city"));
 if (stringifiedCity !== null) {
     searchedCityArr = stringifiedCity;
 }
-
+$(".hideInfo").hide();
 
 var myCityStored = localStorage.getItem("cityInfo");
 console.log(myCityStored);
 var userCity = $(".user-city");
 var searchCityBtn = $(".searchCityBtn");
 var cityInfo = $("#cityInfo");
-var cityButton = $("#cityButton");
+var uvIndex = $("#uvIndex");
+// var cityButton = $("#cityButton");
+
 
 
 function renderCityButtons() {
@@ -29,7 +31,8 @@ function renderCityButtons() {
 
     $(document).on("click", ".dynamicButton", function () {
         console.log($(this).text())
-        $("#currentWeather").show();
+        // $("#currentWeather").show();
+        // displayCityWeather(city);
     })
 }
 var dynamicButton = $(".dynamicButton")
@@ -69,11 +72,14 @@ function displayCityWeather(city) {
 
         }).then(function (response) {
             console.log(response);
-            $("#uvIndex").text("UV Index is: " + response.value);
+            $("div", "#uvIndex").text("UV Index is: " + response.value);
 
         })
 
+        if(uvIndex<2){
 
+            $("#uvIndex").css("background-color", "Green")
+        }
 
     });
 
@@ -84,17 +90,40 @@ function displayCityWeather(city) {
         method: "GET"
     }).then(function (response) {
         console.log(response)
+        $(".hideInfo").show();
 
-        $("#name").text("City: " + response.city.name);
-        $("#temp").text("Temperature: " + response.list[0].main.temp + " \u00B0C");
-        $("#humidity").text("Humidity: " + response.list[0].main.humidity);
-        $("#windSpeed").text("Wind Speed: " + response.list[0].wind.speed);
+        $("#name1").text("City: " + response.city.name);
+        $("#temp1").text("Temperature: " + response.list[0].main.temp + " \u00B0C");
+        $("#humidity1").text("Humidity: " + response.list[0].main.humidity);
+        $("#windSpeed1").text("Wind Speed: " + response.list[0].wind.speed);
+        // $("#uvIndex1").text("UV Index is: " + response.list[0].value);
+
+        $("#name2").text("City: " + response.city.name);
+        $("#temp2").text("Temperature: " + response.list[1].main.temp + " \u00B0C");
+        $("#humidity2").text("Humidity: " + response.list[1].main.humidity);
+        $("#windSpeed2").text("Wind Speed: " + response.list[1].wind.speed);
+        
+
+        $("#name3").text("City: " + response.city.name);
+        $("#temp3").text("Temperature: " + response.list[2].main.temp + " \u00B0C");
+        $("#humidity3").text("Humidity: " + response.list[2].main.humidity);
+        $("#windSpeed3").text("Wind Speed: " + response.list[2].wind.speed);
 
 
+        $("#name4").text("City: " + response.city.name);
+        $("#temp4").text("Temperature: " + response.list[3].main.temp + " \u00B0C");
+        $("#humidity4").text("Humidity: " + response.list[3].main.humidity);
+        $("#windSpeed4").text("Wind Speed: " + response.list[3].wind.speed);
+
+
+        $("#name5").text("City: " + response.city.name);
+        $("#temp5").text("Temperature: " + response.list[4].main.temp + " \u00B0C");
+        $("#humidity5").text("Humidity: " + response.list[4].main.humidity);
+        $("#windSpeed5").text("Wind Speed: " + response.list[4].wind.speed);
     });
 
-
 }
+
 
 searchCityBtn.on("click", function () {
     // grabbing the search input's value using .val() on a click
@@ -125,6 +154,6 @@ searchCityBtn.on("click", function () {
 dynamicButton.on("click", function(){
     displayCityWeather(city);
 })
-displayCityWeather(city);
+// displayCityWeather(city);
 $("#currentWeather").hide();
 renderCityButtons();
