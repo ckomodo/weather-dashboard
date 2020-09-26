@@ -85,6 +85,16 @@ function displayCityWeather(city) {
             else if(response.value<=5){
                 $("#uvIndex").css("background-color", "yellow")
             }
+            else if(response.value ===6 || response.value===7){
+                $("#uvIndex").css("background-color", "orange")
+            }
+            else if(response.value <=10){
+
+                $("#uvIndex").css("background-color", "red")
+            }
+            else if(response.value>=11){
+                $("#uvIndex").css("background-color", "purple")
+            }
             console.log(response.value)
         })
 
